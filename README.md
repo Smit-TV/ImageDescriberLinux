@@ -4,9 +4,7 @@
 
 ## Dependencies
 
-1. python3
-2. pyscreenshot
-3. Grok API key
+* See the dependencies.txt file
 
 ### Usage
 
@@ -24,7 +22,13 @@
 ./main.py
 ```
 
-without any arguments will start image description.
+without any arguments will start image description of fullscreen.
+
+* You can use the
+```bash
+./main.py -w
+```
+to describe the active window
 
 #### Help
 

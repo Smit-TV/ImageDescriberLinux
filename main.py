@@ -10,4 +10,7 @@ if "-s" in sys.argv:
     settingsWindow.main()
     sys.exit(0)
 
-ImageDescriber.describe()
+if "-w" in sys.argv:
+    ImageDescriber.describeWindow()
+else:
+    ImageDescriber.describe()

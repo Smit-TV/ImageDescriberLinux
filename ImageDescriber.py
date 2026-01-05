@@ -5,10 +5,15 @@ import requests
 import os
 import configController
 import ResponseDialog
+import subprocess
 
-SCREENSHOT_SAVE_DIR = "./fullscreen_schreenshot.png"
+SCREENSHOT_SAVE_DIR = "./fullscreen_screenshot.png"
+WINDOW_SCREENSHOT_SAVE_PATH = "./window_screenshot.png"
 
 def describe():
+    subprocess.run([
+        "rm", SCREENSHOT_SAVE_DIR
+    ])
     screenshot = ImageGrab.grab()
     screenshot.save(SCREENSHOT_SAVE_DIR)
     result = describe_image_with_groq(
@@ -19,7 +24,20 @@ def describe():
     )
     ResponseDialog.ResponseDialog(result).create()
 
-
+def describeWindow():
+    subprocess.run([
+        "rm", WINDOW_SCREENSHOT_SAVE_PATH
+    ])
+    subprocess.run([
+        "scrot", "-u", WINDOW_SCREENSHOT_SAVE_PATH
+    ])
+    result = describe_image_with_groq(
+        WINDOW_SCREENSHOT_SAVE_PATH,
+        configController.get_api_key(),
+        configController.get_selected_model(),
+        configController.get_instructions()
+    )
+    ResponseDialog.ResponseDialog(result).create()
 
 def describe_image_with_groq(
     image_path: str,
